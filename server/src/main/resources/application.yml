@@ -1,0 +1,15 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    # SQLite 单文件库；WAL 模式在 schema 初始化时开启
+    url: jdbc:sqlite:${DB_PATH:../data/stock.db}
+    driver-class-name: org.sqlite.JDBC
+    hikari:
+      # SQLite 写并发受限，单连接最稳
+      maximum-pool-size: 1
+
+logging:
+  level:
+    com.stockanalyzer: info
