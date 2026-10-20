@@ -1,6 +1,11 @@
 data/
 __pycache__/
 *.pyc
-server/target/
 *.iml
 .idea/
+.trae/
+logs/
+derby.log
+frontend/node_modules/
+frontend/dist/
+*/target/

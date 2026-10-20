@@ -1,0 +1,197 @@
+/* ===== 主题变量：深色金融风为默认，浅色通过 [data-theme="light"] 覆盖 ===== */
+:root {
+  --bg: #0d1117;
+  --bg-soft: #11161d;
+  --card: #161b22;
+  --card-hover: #1b2230;
+  --border: #232c38;
+  --border-strong: #313c4d;
+  --text: #e6edf3;
+  --text-2: #9aa7b4;
+  --text-3: #6b7684;
+
+  /* A股涨跌语义：红涨绿跌 */
+  --up: #e5484d;
+  --down: #12a461;
+  --flat: #8b949e;
+  --up-soft: rgba(229, 72, 77, 0.12);
+  --down-soft: rgba(18, 164, 97, 0.12);
+  --flat-soft: rgba(139, 148, 158, 0.12);
+
+  --accent: #2f81f7;
+  --accent-soft: rgba(47, 129, 247, 0.14);
+  --warn: #d29922;
+
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.22);
+  --shadow-hover: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 32px rgba(0, 0, 0, 0.4);
+  --mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+}
+
+[data-theme='light'] {
+  --bg: #f4f6fa;
+  --bg-soft: #eaeef5;
+  --card: #ffffff;
+  --card-hover: #ffffff;
+  --border: #e3e8ef;
+  --border-strong: #ccd5e0;
+  --text: #1c2430;
+  --text-2: #56627a;
+  --text-3: #8a94a3;
+
+  --up: #d92d2a;
+  --down: #0a9d5c;
+  --flat: #7b8794;
+  --up-soft: rgba(217, 45, 42, 0.09);
+  --down-soft: rgba(10, 157, 92, 0.09);
+  --flat-soft: rgba(123, 135, 148, 0.1);
+
+  --accent: #2563eb;
+  --accent-soft: rgba(37, 99, 235, 0.1);
+  --warn: #b7791f;
+
+  --shadow: 0 1px 2px rgba(16, 24, 40, 0.06), 0 6px 20px rgba(16, 24, 40, 0.07);
+  --shadow-hover: 0 1px 2px rgba(16, 24, 40, 0.06), 0 12px 28px rgba(16, 24, 40, 0.13);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* 数字一律等宽，避免刷新时跳动 */
+.num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
+}
+
+/* 涨跌配色工具类 */
+.c-up {
+  color: var(--up);
+}
+.c-down {
+  color: var(--down);
+}
+.c-flat {
+  color: var(--flat);
+}
+
+/* 滚动条 */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 6px;
+  border: 2px solid var(--bg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-3);
+}
+
+/* ===== 通用卡片 ===== */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.card--hover:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--border-strong);
+}
+
+/* ===== 信号标签 ===== */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 9px;
+  border-radius: 999px;
+  font-size: 12px;
+  line-height: 20px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.tag--up {
+  color: var(--up);
+  background: var(--up-soft);
+}
+.tag--down {
+  color: var(--down);
+  background: var(--down-soft);
+}
+.tag--flat {
+  color: var(--flat);
+  background: var(--flat-soft);
+}
+.tag--accent {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* ===== 骨架屏 ===== */
+.skeleton {
+  border-radius: var(--radius-sm);
+  background: linear-gradient(90deg, var(--bg-soft) 25%, var(--border) 37%, var(--bg-soft) 63%);
+  background-size: 400% 100%;
+  animation: sk 1.4s ease infinite;
+}
+@keyframes sk {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+/* ===== 过渡 ===== */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+/* ===== 空状态 ===== */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 48px 16px;
+  color: var(--text-3);
+}
+.empty__icon {
+  font-size: 28px;
+  opacity: 0.6;
+}

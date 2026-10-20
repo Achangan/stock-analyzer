@@ -3,12 +3,16 @@ server:
 
 spring:
   datasource:
-    # SQLite 单文件库；WAL 模式在 schema 初始化时开启
-    url: jdbc:sqlite:${DB_PATH:../data/stock.db}
-    driver-class-name: org.sqlite.JDBC
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DB:stock_analyzer}?useUnicode=true&characterEncoding=utf8mb4&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:root123456}
+    driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
-      # SQLite 写并发受限，单连接最稳
-      maximum-pool-size: 1
+      maximum-pool-size: 5
+      minimum-idle: 1
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
 
 logging:
   level:

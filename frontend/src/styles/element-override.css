@@ -1,0 +1,173 @@
+/* ===== Element Plus 主题覆写：主色改为金融青蓝，暗色适配 ===== */
+:root {
+  --el-color-primary: var(--accent);
+  --el-color-primary-light-3: color-mix(in srgb, var(--accent) 70%, var(--card));
+  --el-color-primary-light-5: color-mix(in srgb, var(--accent) 50%, var(--card));
+  --el-color-primary-light-7: color-mix(in srgb, var(--accent) 30%, var(--card));
+  --el-color-primary-light-8: color-mix(in srgb, var(--accent) 20%, var(--card));
+  --el-color-primary-light-9: var(--accent-soft);
+  --el-color-primary-dark-2: color-mix(in srgb, var(--accent) 80%, #000);
+
+  --el-bg-color: var(--card);
+  --el-bg-color-overlay: var(--card);
+  --el-bg-color-page: var(--bg);
+  --el-text-color-primary: var(--text);
+  --el-text-color-regular: var(--text-2);
+  --el-text-color-secondary: var(--text-3);
+  --el-text-color-placeholder: var(--text-3);
+  --el-border-color: var(--border);
+  --el-border-color-light: var(--border);
+  --el-border-color-lighter: var(--border);
+  --el-border-color-extra-light: var(--border);
+  --el-fill-color-blank: var(--card);
+  --el-fill-color-light: var(--bg-soft);
+  --el-fill-color-lighter: var(--bg-soft);
+  --el-mask-color: rgba(0, 0, 0, 0.65);
+  --el-border-radius-base: var(--radius-sm);
+  --el-font-family: inherit;
+}
+
+/* 表格 */
+.el-table {
+  --el-table-border-color: var(--border);
+  --el-table-header-bg-color: var(--bg-soft);
+  --el-table-row-hover-bg-color: var(--card-hover);
+  --el-table-bg-color: transparent;
+  --el-table-tr-bg-color: transparent;
+  background: transparent;
+  color: var(--text);
+}
+.el-table th.el-table__cell {
+  font-weight: 600;
+  color: var(--text-2);
+  font-size: 13px;
+}
+.el-table td.el-table__cell,
+.el-table th.el-table__cell {
+  border-bottom: 1px solid var(--border);
+}
+.el-table__empty-block {
+  background: transparent;
+}
+.el-table__body tr:hover > td.el-table__cell {
+  background: var(--card-hover) !important;
+}
+.el-table .sort-caret.ascending {
+  border-bottom-color: var(--text-3);
+}
+.el-table .sort-caret.descending {
+  border-top-color: var(--text-3);
+}
+
+/* 按钮 */
+.el-button {
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+}
+.el-button--default {
+  background: var(--card);
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+.el-button--default:hover {
+  background: var(--card-hover);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* 标签 */
+.el-tag {
+  border-radius: 6px;
+  border: none;
+}
+
+/* 输入框 / 下拉 */
+.el-input__wrapper,
+.el-select__wrapper {
+  background: var(--bg-soft);
+  box-shadow: 0 0 0 1px var(--border) inset;
+  border-radius: var(--radius-sm);
+}
+.el-input__wrapper:hover,
+.el-select__wrapper:hover {
+  box-shadow: 0 0 0 1px var(--border-strong) inset;
+}
+.el-input__wrapper.is-focus,
+.el-select__wrapper.is-focused {
+  box-shadow: 0 0 0 1px var(--accent) inset;
+}
+.el-input__inner {
+  color: var(--text);
+}
+
+/* 弹层 */
+.el-popper.is-light {
+  background: var(--card);
+  border: 1px solid var(--border-strong);
+  color: var(--text);
+}
+.el-popper.is-light .el-popper__arrow::before {
+  background: var(--card);
+  border-color: var(--border-strong);
+}
+.el-select-dropdown__item.is-selected {
+  color: var(--accent);
+}
+.el-select-dropdown__item.is-hovering {
+  background: var(--card-hover);
+}
+.el-select-dropdown__item {
+  color: var(--text-2);
+}
+
+/* 抽屉 */
+.el-drawer {
+  background: var(--card);
+}
+.el-drawer__header {
+  margin-bottom: 0;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+.el-drawer__body {
+  padding: 0;
+  overflow: auto;
+}
+.el-overlay {
+  backdrop-filter: blur(2px);
+}
+
+/* 单选 / 复选 */
+.el-radio-button__inner {
+  background: var(--bg-soft);
+  border-color: var(--border);
+  color: var(--text-2);
+}
+.el-radio-button__original-radio:checked + .el-radio-button__inner {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  box-shadow: none;
+}
+.el-checkbox__label {
+  color: var(--text-2);
+}
+.el-checkbox__input.is-checked .el-checkbox__inner {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* 消息提示 */
+.el-message {
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-strong);
+}
+
+/* 描述列表 / 分页 */
+.el-descriptions__body {
+  background: transparent;
+}
+.el-loading-mask {
+  background: color-mix(in srgb, var(--bg) 70%, transparent);
+}
