@@ -33,8 +33,32 @@
           <ComparePanel :codes="codes" :theme="theme" />
         </div>
 
+        <div v-else-if="active === 'stock'" class="pane">
+          <StockPanel :theme="theme" />
+        </div>
+
+        <div v-else-if="active === 'factor'" class="pane">
+          <FactorPanel />
+        </div>
+
+        <div v-else-if="active === 'backtest'" class="pane">
+          <BacktestPanel />
+        </div>
+
+        <div v-else-if="active === 'watchlist'" class="pane">
+          <WatchlistPanel />
+        </div>
+
+        <div v-else-if="active === 'position'" class="pane">
+          <PositionPanel />
+        </div>
+
         <div v-else-if="active === 'report'" class="pane">
           <ReportPanel />
+        </div>
+
+        <div v-else-if="active === 'learn'" class="pane">
+          <LearnPanel />
         </div>
 
         <div v-else class="pane">
@@ -59,13 +83,19 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
-import { Document, Files, Monitor, TrendCharts } from '@element-plus/icons-vue'
+import { Bell, Coin, DataLine, Document, Files, Histogram, Monitor, Reading, TrendCharts, Wallet } from '@element-plus/icons-vue'
 import AppHeader from '@/components/AppHeader.vue'
 import OverviewCards from '@/components/OverviewCards.vue'
 import IndexTable from '@/components/IndexTable.vue'
 import ComparePanel from '@/components/ComparePanel.vue'
 import ReportPanel from '@/components/ReportPanel.vue'
 import CoveragePanel from '@/components/CoveragePanel.vue'
+import LearnPanel from '@/components/LearnPanel.vue'
+import FactorPanel from '@/components/FactorPanel.vue'
+import BacktestPanel from '@/components/BacktestPanel.vue'
+import WatchlistPanel from '@/components/WatchlistPanel.vue'
+import PositionPanel from '@/components/PositionPanel.vue'
+import StockPanel from '@/components/StockPanel.vue'
 import IndexDetailDrawer from '@/components/IndexDetailDrawer.vue'
 import { useOverview } from '@/composables/useOverview'
 
@@ -74,7 +104,13 @@ type Theme = 'dark' | 'light'
 const tabs = [
   { key: 'overview', label: '市场概览', icon: Monitor },
   { key: 'compare', label: '指数对比', icon: TrendCharts },
+  { key: 'stock', label: '个股行情', icon: Coin },
+  { key: 'factor', label: '因子打分', icon: Histogram },
+  { key: 'backtest', label: '策略回测', icon: DataLine },
+  { key: 'watchlist', label: '自选预警', icon: Bell },
+  { key: 'position', label: '持仓管理', icon: Wallet },
   { key: 'report', label: '每日报告', icon: Document },
+  { key: 'learn', label: '理财学习', icon: Reading },
   { key: 'coverage', label: '数据覆盖', icon: Files },
 ]
 

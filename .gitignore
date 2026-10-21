@@ -5,6 +5,7 @@ __pycache__/
 .idea/
 .trae/
 logs/
+*.log
 derby.log
 frontend/node_modules/
 frontend/dist/

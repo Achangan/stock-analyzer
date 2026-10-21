@@ -4,10 +4,29 @@ server:
 spring:
   application:
     name: report-service
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:${MYSQL_PORT:3306}/${MYSQL_DB:stock_analyzer}?useUnicode=true&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:root123456}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 3
+      minimum-idle: 1
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
   cloud:
     nacos:
       discovery:
         server-addr: localhost:8848
+
+knowledge:
+  hub-dir: C:/Users/22692/Documents/Trae-CN/default/finance-knowledge-hub/docs
+
+pipeline:
+  cron: 0 0 16 * * MON-FRI
+  python: C:/Users/22692/AppData/Local/Programs/Python/Python314/python.exe
+  collector-dir: D:/stock-analyzer/collector
 
 feign:
   client:

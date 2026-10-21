@@ -23,8 +23,10 @@ def init_db(conn: pymysql.Connection) -> None:
     with conn.cursor() as cur:
         # MySQL 不支持 executescript，按分号切分执行
         for stmt in sql.split(';'):
-            stmt = stmt.strip()
-            if stmt and not stmt.startswith('--'):
+            # 逐行剔除注释，避免整条语句因以 "--" 开头被误跳过
+            lines = [ln for ln in stmt.splitlines() if not ln.strip().startswith('--')]
+            stmt = "\n".join(lines).strip()
+            if stmt:
                 cur.execute(stmt)
     conn.commit()
 
@@ -34,8 +36,8 @@ def upsert_many(conn: pymysql.Connection, table: str, columns: list[str], rows: 
     if not rows:
         return 0
     placeholders = ",".join(["%s"] * len(columns))
-    cols = ",".join(columns)
-    updates = ",".join([f"{c}=VALUES({c})" for c in columns])
+    cols = ",".join(f"`{c}`" for c in columns)  # 列名加反引号，规避 change 等保留字
+    updates = ",".join([f"`{c}`=VALUES(`{c}`)" for c in columns])
     sql = f"INSERT INTO {table} ({cols}) VALUES ({placeholders}) ON DUPLICATE KEY UPDATE {updates}"
     with conn.cursor() as cur:
         cur.executemany(sql, rows)

@@ -28,6 +28,12 @@ spring:
             - Path=/api/report/**
           filters:
             - StripPrefix=2
+        - id: portfolio-service
+          uri: lb://portfolio-service
+          predicates:
+            - Path=/api/portfolio/**
+          filters:
+            - StripPrefix=2
       globalcors:
         cors-configurations:
           '[/**]':

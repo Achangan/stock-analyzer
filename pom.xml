@@ -22,6 +22,7 @@
         <module>quote-service</module>
         <module>analysis-service</module>
         <module>report-service</module>
+        <module>portfolio-service</module>
         <module>gateway-service</module>
     </modules>
 

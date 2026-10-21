@@ -14,4 +14,12 @@ public interface QuoteFeignClient {
 
     @GetMapping("/index/{code}/recent")
     List<IndexDaily> getRecentQuotes(@PathVariable("code") String code, @RequestParam("limit") int limit);
+
+    @GetMapping("/index/list")
+    List<String> getIndexCodes();
+
+    @GetMapping("/index/{code}/range")
+    List<IndexDaily> getRangeQuotes(@PathVariable("code") String code,
+                                    @RequestParam(value = "start", required = false) String start,
+                                    @RequestParam(value = "end", required = false) String end);
 }
