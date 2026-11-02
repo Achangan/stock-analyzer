@@ -339,3 +339,40 @@ export const stockApi = {
       .get<IndexDaily[]>(`/quote/stock/${encodeURIComponent(code)}/range`, { params: { start, end } })
       .then((r) => r.data),
 }
+
+/** 策略榜单（采集端 screen_stocks.py 写入 screen_result） */
+export interface ScreenRow {
+  tradeDate: string
+  tsCode: string
+  name: string
+  industry: string | null
+  rankNo: number
+  close: number
+  pctChg: number | null
+  pe: number | null
+  pb: number | null
+  mcap: number | null
+  mom5: number | null
+  mom20: number | null
+  trend: number | null
+  volratio: number | null
+  vol20: number | null
+  rsi14: number | null
+  drawdown60: number | null
+  score: number
+  createdAt: string
+}
+
+export interface ScreenResultData {
+  tradeDate: string | null
+  list: ScreenRow[]
+  disclaimer: string
+}
+
+export const screenApi = {
+  list: (date?: string, limit = 20) =>
+    http
+      .get<ScreenResultData>('/analysis/screen/list', { params: { date, limit } })
+      .then((r) => r.data),
+  dates: () => http.get<string[]>('/analysis/screen/dates').then((r) => r.data),
+}

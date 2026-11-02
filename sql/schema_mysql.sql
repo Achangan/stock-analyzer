@@ -130,3 +130,28 @@ CREATE TABLE IF NOT EXISTS portfolio_position (
     buy_date    DATE,
     note        VARCHAR(200)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- 每日策略榜单（采集端选股结果，analysis-service 只读展示）
+CREATE TABLE IF NOT EXISTS screen_result (
+    trade_date  DATE NOT NULL,              -- 数据基准交易日
+    ts_code     VARCHAR(20) NOT NULL,
+    name        VARCHAR(50),
+    industry    VARCHAR(50),
+    rank_no     INT NOT NULL,               -- 榜单排名
+    close       DECIMAL(12,4),
+    pct_chg     DECIMAL(10,4),              -- 当日涨跌幅 %
+    pe          DECIMAL(10,4),
+    pb          DECIMAL(10,4),
+    mcap        DECIMAL(20,4),              -- 总市值（亿）
+    mom5        DECIMAL(10,4),              -- 5 日涨幅 %
+    mom20       DECIMAL(10,4),              -- 20 日涨幅 %
+    trend       DECIMAL(4,2),               -- 均线趋势 0~1
+    volratio    DECIMAL(10,4),              -- 5 日/20 日量比
+    vol20       DECIMAL(10,4),              -- 20 日年化波动率 %
+    rsi14       DECIMAL(8,2),
+    drawdown60  DECIMAL(10,4),              -- 距 60 日高点回撤 %
+    score       DECIMAL(8,2),
+    created_at  DATETIME NOT NULL,
+    PRIMARY KEY (trade_date, ts_code),
+    INDEX idx_screen_rank (trade_date, rank_no)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

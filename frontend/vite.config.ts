@@ -16,7 +16,8 @@ export default defineConfig({
     },
   },
   server: {
-    port: 5174,
+    // 5174 落在 Windows Hyper-V 保留端口段（5107-5206），会被系统拒绝监听
+    port: 5274,
     proxy: {
       '/api': {
         target: 'http://localhost:8080',

@@ -41,6 +41,10 @@
           <FactorPanel />
         </div>
 
+        <div v-else-if="active === 'screen'" class="pane">
+          <ScreenPanel />
+        </div>
+
         <div v-else-if="active === 'backtest'" class="pane">
           <BacktestPanel />
         </div>
@@ -83,7 +87,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
-import { Bell, Coin, DataLine, Document, Files, Histogram, Monitor, Reading, TrendCharts, Wallet } from '@element-plus/icons-vue'
+import { Bell, Coin, DataLine, Document, Files, Histogram, Monitor, Reading, Star, TrendCharts, Wallet } from '@element-plus/icons-vue'
 import AppHeader from '@/components/AppHeader.vue'
 import OverviewCards from '@/components/OverviewCards.vue'
 import IndexTable from '@/components/IndexTable.vue'
@@ -92,6 +96,7 @@ import ReportPanel from '@/components/ReportPanel.vue'
 import CoveragePanel from '@/components/CoveragePanel.vue'
 import LearnPanel from '@/components/LearnPanel.vue'
 import FactorPanel from '@/components/FactorPanel.vue'
+import ScreenPanel from '@/components/ScreenPanel.vue'
 import BacktestPanel from '@/components/BacktestPanel.vue'
 import WatchlistPanel from '@/components/WatchlistPanel.vue'
 import PositionPanel from '@/components/PositionPanel.vue'
@@ -106,6 +111,7 @@ const tabs = [
   { key: 'compare', label: '指数对比', icon: TrendCharts },
   { key: 'stock', label: '个股行情', icon: Coin },
   { key: 'factor', label: '因子打分', icon: Histogram },
+  { key: 'screen', label: '策略榜单', icon: Star },
   { key: 'backtest', label: '策略回测', icon: DataLine },
   { key: 'watchlist', label: '自选预警', icon: Bell },
   { key: 'position', label: '持仓管理', icon: Wallet },
